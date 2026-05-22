@@ -1,8 +1,11 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import InputText from "../../components/ui/InputText";
 import Button from "../../components/ui/Button";
+import { apiPost } from "../../lib/api";
 
 type FormData = {
   nama: string;
@@ -15,17 +18,26 @@ const schema = z.object({
 });
 
 export default function SpeakerCreate() {
+  const navigate = useNavigate();
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
-    alert("Speaker berhasil ditambahkan!");
+  const onSubmit = async (data: FormData) => {
+    try {
+      setSubmitError(null);
+      await apiPost("/speakers", { nama: data.nama, role: data.role });
+      navigate("/dashboard/seminar");
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error ? err.message : "Gagal menyimpan speaker."
+      );
+    }
   };
 
   return (
@@ -36,6 +48,11 @@ export default function SpeakerCreate() {
           <p className="text-gray-400 text-sm mt-1">Lengkapi informasi narasumber baru</p>
         </div>
 
+        {submitError && (
+          <p className="mb-4 text-sm text-red-600 rounded-xl bg-red-50 border border-red-200 px-4 py-3">
+            {submitError}
+          </p>
+        )}
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
           <InputText
             label="Nama Lengkap Speaker"
@@ -51,7 +68,8 @@ export default function SpeakerCreate() {
           />
           <div className="pt-4">
             <Button
-              label="Simpan Speaker"
+              type="submit"
+              label={isSubmitting ? "Menyimpan..." : "Simpan Speaker"}
               variant="primary"
               className="w-full bg-[#7B1D3F] hover:bg-[#5a152e] text-white py-4 rounded-2xl font-bold shadow-md transition-all"
             />

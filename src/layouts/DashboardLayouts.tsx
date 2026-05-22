@@ -1,5 +1,6 @@
 import { Outlet, useNavigate, Link, useLocation } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
+import { Button } from "../components/ui/Button";
 
 export default function DashboardLayouts() {
   const logout = useAuthStore((state) => state.logout);
@@ -17,6 +18,7 @@ export default function DashboardLayouts() {
     { name: "Category Event", path: "/dashboard/category" },
     { name: "Event", path: "/dashboard/event" },
     { name: "Pembicara", path: "/dashboard/seminar" },
+    { name: "Biodata", path: "/dashboard/biodata" },
   ];
 
   return (
@@ -25,18 +27,20 @@ export default function DashboardLayouts() {
       <div className="w-64 bg-[#7B1D3F] text-white flex flex-col justify-between sticky top-0 h-screen shadow-xl">
         <div>
           <div className="p-8 mb-4">
-            <h2 className="text-2xl font-bold tracking-tighter italic border-b border-maroon-400 pb-4">
-              INVOFEST
+            <h2 className="text-2xl font-bold border-b border-white/10 pb-4">
+              MAIN DASHBOARD
             </h2>
           </div>
 
-          <nav className="flex flex-col px-4 gap-2">
+          <nav className="flex flex-col px-4 gap-6">
             {menuItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
                 className={`px-4 py-3 rounded-xl font-medium transition-all ${
-                  location.pathname === item.path
+                  location.pathname === item.path ||
+                  (item.path !== "/dashboard" &&
+                    location.pathname.startsWith(item.path))
                     ? "bg-white text-[#7B1D3F] shadow-md"
                     : "hover:bg-[#8B1D3F] text-white/80 hover:text-white"
                 }`}
@@ -48,13 +52,12 @@ export default function DashboardLayouts() {
         </div>
 
         <div className="p-6">
-          <button
+          <Button
+            label="Logout"
+            variant="outline"
+            className="w-full bg-[#8B1D2E] hover:bg-red-800 text-white py-2 rounded-xl font-bold transition-colors shadow-md border border-white/10"
             onClick={handleLogout}
-            className="w-full bg-[#8B1D2E] hover:bg-red-800 text-white py-3 rounded-xl font-bold transition-all shadow-md border border-white/10"
-            type="button"
-          >
-            Logout
-          </button>
+          />
         </div>
       </div>
 

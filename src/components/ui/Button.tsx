@@ -3,6 +3,7 @@ interface ButtonProps {
   variant?: "primary" | "outline";
   className?: string;
   onClick?: () => void;
+  type?: "button" | "submit" | "reset";
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -10,13 +11,15 @@ export const Button: React.FC<ButtonProps> = ({
   variant = "primary",
   className,
   onClick,
+  type = "button",
 }) => {
   const baseStyle =
-    "px-6 py-4 rounded-xl font-medium transition-all duration-500 cursor-pointer";
+    "px-6 py-3 rounded-xl font-medium transition-all duration-500 cursor-pointer";
 
   if (variant === "outline") {
     return (
       <button
+        type={type}
         onClick={onClick}
         className={`group relative overflow-hidden border border-red-900 text-red-900 hover:text-white ${baseStyle} ${className}`}
       >
@@ -30,6 +33,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
+      type={type}
       onClick={onClick}
       className={`bg-red-900 text-white hover:bg-red-800 ${baseStyle} ${className}`}
     >

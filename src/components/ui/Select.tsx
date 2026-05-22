@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface InputSelectEventProps {
     label: string;
@@ -7,6 +7,7 @@ interface InputSelectEventProps {
     setValue: any;
     error?: string;
     placeholder?: string;
+    defaultValue?: string;
 }
 
 const events = ["Workshop", "Seminar", "IT Competition"] as const;
@@ -18,9 +19,17 @@ const InputSelectEvent: React.FC<InputSelectEventProps> = ({
     setValue,
     error,
     placeholder = "-- Pilih Event --",
+    defaultValue,
 }) => {
     const [open, setOpen] = useState(false);
-    const [selected, setSelected] = useState<string | null>(null);
+    const [selected, setSelected] = useState<string | null>(defaultValue ?? null);
+
+    useEffect(() => {
+        if (defaultValue) {
+            setSelected(defaultValue);
+            setValue(nama, defaultValue);
+        }
+    }, [defaultValue, nama, setValue]);
 
     const handleSelect = (event: string) => {
         setSelected(event);

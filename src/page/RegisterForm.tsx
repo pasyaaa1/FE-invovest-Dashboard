@@ -3,14 +3,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Link, useNavigate } from "react-router-dom";
-
-// Import komponen UI sesuai jalur proyek
 import InputText from "../components/ui/InputText";
 import InputPassword from "../components/ui/InputPassword";
 import InputSelectEvent from "../components/ui/Select";
 import Textarea from "../components/ui/TextArea";
+import { useAuthStore } from "../store/useAuthStore";
 
-// Schema validasi
 const schema = z
   .object({
     nama: z.string().min(1, "Nama harus diisi"),
@@ -29,6 +27,7 @@ type FormData = z.infer<typeof schema>;
 
 export default function RegisterForm() {
   const navigate = useNavigate();
+  const registerUser = useAuthStore((state) => state.register);
   const [loading, setLoading] = useState(false);
 
   const {
@@ -43,16 +42,13 @@ export default function RegisterForm() {
   const onSubmit = (data: FormData) => {
     setLoading(true);
 
-    const userToSave = {
+    registerUser({
       nama: data.nama,
       email: data.email,
       password: data.password,
       event: data.event,
-      bio: data.bio
-    };
-
-    console.log("Menyimpan user:", userToSave);
-    localStorage.setItem("registeredUser", JSON.stringify(userToSave));
+      bio: data.bio,
+    });
 
     setTimeout(() => {
       alert("Registrasi Berhasil!");
@@ -62,91 +58,79 @@ export default function RegisterForm() {
   };
 
   return (
-    
-    <div className="min-h-screen flex items-center justify-center bg-[#F3F4F6] px-4 py-10">
-      
-      {/* Kartu Putih (Formulir) - max-w-lg agar kotak tidak terlalu lebar */}
-      <div className="w-full max-w-lg bg-white p-8 md:p-10 rounded-[2.5rem] shadow-sm border border-gray-100">
-        
-        {/* Header Teks */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-[#7B1D3F] mb-1">
-            Daftar Akun!
-          </h1>
-          <p className="text-gray-400 text-sm">
-            Lengkapi data untuk bergabung di Invofest
-          </p>
-        </div>
-
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          
-          <InputText
-            label="Nama Lengkap"
-            nama="nama"
-            register={register}
-            error={errors.nama?.message}
-          />
-
-          <InputText
-            label="Email"
-            nama="email"
-            register={register}
-            error={errors.email?.message}
-          />
-
-          {/**/}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <InputPassword
-              label="Password"
-              nama="password"
-              register={register}
-              error={errors.password?.message}
-            />
-
-            <InputPassword
-              label="Konfirmasi Password"
-              nama="confirmPassword"
-              register={register}
-              error={errors.confirmPassword?.message}
-            />
-          </div>
-
-          <InputSelectEvent
-            label="Pilih Event"
-            nama="event"
-            register={register}
-            setValue={setValue}
-            error={errors.event?.message}
-          />
-
-          <Textarea
-            label="Bio Singkat"
-            nama="bio"
-            register={register}
-            error={errors.bio?.message}
-          />
-
-          <div className="pt-4">
-            <button 
-              type="submit"
-              disabled={loading}
-              className={`w-full bg-[#7B1D3F] hover:bg-[#5a152e] text-white py-4 rounded-2xl font-bold transition-all shadow-md ${
-                loading ? "opacity-50 pointer-events-none" : ""
-              }`} 
-            >
-              {loading ? "Loadinggg..." : "Daftar Sekarang"}
-            </button>
-          </div>
-        </form>
-
-        {/* Link Navigasi ke Login */}
-        <p className="text-center text-sm mt-8 text-gray-500">
-          Sudah punya akun?{" "}
-          <Link to="/login" className="text-[#7B1D3F] font-bold hover:underline">
-            Login di sini
-          </Link>
+    <div className="w-full max-w-lg bg-white p-8 md:p-10 rounded-[2.5rem] shadow-sm border border-gray-100">
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold text-[#7B1D3F] mb-1">Daftar Akun!</h1>
+        <p className="text-gray-400 text-sm">
+          Lengkapi data untuk bergabung di Invofest
         </p>
       </div>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <InputText
+          label="Nama Lengkap"
+          nama="nama"
+          register={register}
+          error={errors.nama?.message}
+        />
+
+        <InputText
+          label="Email"
+          nama="email"
+          register={register}
+          error={errors.email?.message}
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <InputPassword
+            label="Password"
+            nama="password"
+            register={register}
+            error={errors.password?.message}
+          />
+
+          <InputPassword
+            label="Konfirmasi Password"
+            nama="confirmPassword"
+            register={register}
+            error={errors.confirmPassword?.message}
+          />
+        </div>
+
+        <InputSelectEvent
+          label="Pilih Event"
+          nama="event"
+          register={register}
+          setValue={setValue}
+          error={errors.event?.message}
+        />
+
+        <Textarea
+          label="Bio Singkat"
+          nama="bio"
+          register={register}
+          error={errors.bio?.message}
+        />
+
+        <div className="pt-4">
+          <button
+            type="submit"
+            disabled={loading}
+            className={`w-full bg-[#7B1D3F] hover:bg-[#5a152e] text-white py-4 rounded-2xl font-bold transition-all shadow-md ${
+              loading ? "opacity-50 pointer-events-none" : ""
+            }`}
+          >
+            {loading ? "Loadinggg..." : "Daftar Sekarang"}
+          </button>
+        </div>
+      </form>
+
+      <p className="text-center text-sm mt-8 text-gray-500">
+        Sudah punya akun?{" "}
+        <Link to="/login" className="text-[#7B1D3F] font-bold hover:underline">
+          Login di sini
+        </Link>
+      </p>
     </div>
   );
 }

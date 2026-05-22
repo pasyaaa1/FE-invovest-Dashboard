@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface InputDateProps {
     label: string;
@@ -7,6 +7,7 @@ interface InputDateProps {
     setValue: any;
     error?: string;
     placeholder?: string;
+    defaultValue?: string;
 }
 
 const MONTHS = [
@@ -22,12 +23,26 @@ const InputDate: React.FC<InputDateProps> = ({
     setValue,
     error,
     placeholder = "-- Pilih Tanggal --",
+    defaultValue,
 }) => {
     const today = new Date();
+    const initialDate = defaultValue ? new Date(defaultValue) : null;
     const [open, setOpen] = useState(false);
-    const [selected, setSelected] = useState<Date | null>(null);
-    const [viewMonth, setViewMonth] = useState(today.getMonth());
-    const [viewYear, setViewYear] = useState(today.getFullYear());
+    const [selected, setSelected] = useState<Date | null>(initialDate);
+    const [viewMonth, setViewMonth] = useState(initialDate?.getMonth() ?? today.getMonth());
+    const [viewYear, setViewYear] = useState(initialDate?.getFullYear() ?? today.getFullYear());
+
+    useEffect(() => {
+        if (defaultValue) {
+            const date = new Date(defaultValue);
+            if (!Number.isNaN(date.getTime())) {
+                setSelected(date);
+                setViewMonth(date.getMonth());
+                setViewYear(date.getFullYear());
+                setValue(nama, defaultValue.slice(0, 10));
+            }
+        }
+    }, [defaultValue, nama, setValue]);
 
     const getDaysInMonth = (month: number, year: number) => new Date(year, month + 1, 0).getDate();
     const getFirstDayOfMonth = (month: number, year: number) => new Date(year, month, 1).getDay();
