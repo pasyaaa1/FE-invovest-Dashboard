@@ -2,10 +2,18 @@ import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { apiDelete, apiGet, asArray } from "../../lib/api";
 import { formatDateId } from "../../lib/date";
+import {
+  labelForOption,
+  loadCategoryOptions,
+  loadSpeakerOptions,
+} from "../../lib/eventFormOptions";
+import type { SelectOption } from "../../components/ui/Select";
 import type { EventItem } from "../../types/api";
 
 export default function EventIndex() {
   const [events, setEvents] = useState<EventItem[]>([]);
+  const [categoryOptions, setCategoryOptions] = useState<SelectOption[]>([]);
+  const [speakerOptions, setSpeakerOptions] = useState<SelectOption[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<number | null>(null);
@@ -14,8 +22,14 @@ export default function EventIndex() {
     setLoading(true);
     setError(null);
     try {
-      const raw = await apiGet<unknown>("/events");
+      const [raw, categories, speakers] = await Promise.all([
+        apiGet<unknown>("/events"),
+        loadCategoryOptions(),
+        loadSpeakerOptions(),
+      ]);
       setEvents(asArray<EventItem>(raw));
+      setCategoryOptions(categories);
+      setSpeakerOptions(speakers);
     } catch (err) {
       setError(
         err instanceof Error
@@ -89,8 +103,14 @@ export default function EventIndex() {
                 <dl className="mt-3 grid gap-1 text-sm text-gray-600">
                   <div>
                     <span className="font-medium text-gray-500">Kategori: </span>
-                    {event.categoryId}
+                    {labelForOption(categoryOptions, event.categoryId)}
                   </div>
+                  {event.speakerId && (
+                    <div>
+                      <span className="font-medium text-gray-500">Pembicara: </span>
+                      {labelForOption(speakerOptions, event.speakerId)}
+                    </div>
+                  )}
                   <div>
                     <span className="font-medium text-gray-500">Lokasi: </span>
                     {event.location}

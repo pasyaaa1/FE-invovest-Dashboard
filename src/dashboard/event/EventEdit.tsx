@@ -5,16 +5,22 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import InputText from "../../components/ui/InputText";
 import InputSelectEvent from "../../components/ui/Select";
+import type { SelectOption } from "../../components/ui/Select";
 import InputDate from "../../components/ui/InputDate";
 import Textarea from "../../components/ui/TextArea";
 import Button from "../../components/ui/Button";
 import { apiGet, apiPut } from "../../lib/api";
+import {
+  loadCategoryOptions,
+  loadSpeakerOptions,
+} from "../../lib/eventFormOptions";
 import { toInputDate } from "../../lib/date";
 import type { EventItem } from "../../types/api";
 
 type FormData = {
   nama: string;
   category: string;
+  pembicara: string;
   date: string;
   location: string;
   bio: string;
@@ -22,7 +28,8 @@ type FormData = {
 
 const schema = z.object({
   nama: z.string().min(1, "Nama harus diisi"),
-  category: z.string().min(1, "Category harus dipilih"),
+  category: z.string().min(1, "Kategori harus dipilih"),
+  pembicara: z.string().min(1, "Pembicara harus dipilih"),
   date: z.string().min(1, "Tanggal harus diisi"),
   location: z.string().min(1, "Lokasi harus diisi"),
   bio: z.string().max(100, "Bio maksimal 100 karakter"),
@@ -35,19 +42,36 @@ export default function EventEdit() {
   const [loadError, setLoadError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [defaults, setDefaults] = useState<FormData | null>(null);
+  const [categoryOptions, setCategoryOptions] = useState<SelectOption[]>([]);
+  const [speakerOptions, setSpeakerOptions] = useState<SelectOption[]>([]);
+  const [optionsLoading, setOptionsLoading] = useState(true);
 
-  const { register, handleSubmit, setValue, reset, formState: { errors, isSubmitting } } =
-    useForm<FormData>({ resolver: zodResolver(schema) });
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   useEffect(() => {
     if (!id) return;
     (async () => {
       try {
         setLoading(true);
-        const event = await apiGet<EventItem>(`/events/${id}`);
+        setOptionsLoading(true);
+        const [event, categories, speakers] = await Promise.all([
+          apiGet<EventItem>(`/events/${id}`),
+          loadCategoryOptions(),
+          loadSpeakerOptions(),
+        ]);
+        setCategoryOptions(categories);
+        setSpeakerOptions(speakers);
+
         const formData: FormData = {
           nama: event.name,
           category: event.categoryId,
+          pembicara: event.speakerId ?? "",
           date: toInputDate(event.dateEvent),
           location: event.location,
           bio: event.description,
@@ -58,6 +82,7 @@ export default function EventEdit() {
         setLoadError(err instanceof Error ? err.message : "Gagal memuat event.");
       } finally {
         setLoading(false);
+        setOptionsLoading(false);
       }
     })();
   }, [id, reset]);
@@ -70,6 +95,7 @@ export default function EventEdit() {
         name: data.nama,
         tanggal: data.date,
         category: data.category,
+        pembicara: data.pembicara,
         location: data.location,
         description: data.bio,
       });
@@ -120,17 +146,33 @@ export default function EventEdit() {
               register={register}
               setValue={setValue}
               error={errors.category?.message}
+              options={categoryOptions}
+              loading={optionsLoading}
+              placeholder="-- Pilih Kategori --"
+              emptyMessage="Belum ada kategori"
               defaultValue={defaults?.category}
             />
-            <InputDate
-              label="Tanggal"
-              nama="date"
+            <InputSelectEvent
+              label="Pembicara"
+              nama="pembicara"
               register={register}
               setValue={setValue}
-              error={errors.date?.message}
-              defaultValue={defaults?.date}
+              error={errors.pembicara?.message}
+              options={speakerOptions}
+              loading={optionsLoading}
+              placeholder="-- Pilih Pembicara --"
+              emptyMessage="Belum ada pembicara"
+              defaultValue={defaults?.pembicara}
             />
           </div>
+          <InputDate
+            label="Tanggal"
+            nama="date"
+            register={register}
+            setValue={setValue}
+            error={errors.date?.message}
+            defaultValue={defaults?.date}
+          />
           <InputText label="Lokasi" nama="location" register={register} error={errors.location?.message} />
           <Textarea label="Deskripsi" nama="bio" register={register} error={errors.bio?.message} />
           <div className="flex flex-wrap gap-3 pt-4">

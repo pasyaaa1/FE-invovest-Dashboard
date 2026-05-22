@@ -4,6 +4,7 @@ export interface EventItem {
   id: number;
   name: string;
   categoryId: string;
+  speakerId?: string | null;
   location: string;
   dateEvent: string;
   description: string;
