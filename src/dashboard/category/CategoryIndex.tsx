@@ -44,10 +44,10 @@ export default function CategoryIndex() {
   };
 
   return (
-    <div className="p-8 bg-[#F3F4F6] min-h-full">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-200 pb-8 mb-8">
+    <div className="p-4 sm:p-6 md:p-8 bg-[#F3F4F6] min-h-full">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-6 md:pb-8 mb-6 md:mb-8">
         <div>
-          <h2 className="text-3xl font-bold text-[#7B1D3F]">Kategori Event</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#7B1D3F]">Kategori Event</h2>
           <p className="text-gray-500">Kelola jenis kegiatan festival di sini</p>
         </div>
         <Link
@@ -83,7 +83,7 @@ export default function CategoryIndex() {
           {categories.map((cat) => (
             <li
               key={cat.id}
-              className="bg-white rounded-2xl border border-gray-100 px-6 py-4 shadow-sm font-medium text-[#7B1D3F] flex justify-between items-center"
+              className="bg-white rounded-2xl border border-gray-100 px-4 sm:px-6 py-4 shadow-sm font-medium text-[#7B1D3F] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3"
             >
               <span>{cat.name}</span>
               <div className="flex gap-4">

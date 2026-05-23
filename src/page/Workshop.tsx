@@ -56,16 +56,16 @@ Developer, Founder Rumah Coding Indonesia`,
     <div>
       <section
         id="hero"
-        className="py-10 flex gap-10 justify-between items-center "
+        className="py-6 md:py-10 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 items-center"
       >
-        <div className="w-2/3 flex flex-col gap-6 mr-10">
-          <h1 className="text-red-800 text-5xl font-semibold">IT Workshop</h1>
-          <h1 className="text-red-800 text-3xl font-semibold  mr-4  ">
+        <div className="flex flex-col gap-4 md:gap-6 order-2 lg:order-1">
+          <h1 className="text-red-800 text-3xl sm:text-4xl md:text-5xl font-semibold">IT Workshop</h1>
+          <h2 className="text-red-800 text-xl sm:text-2xl md:text-3xl font-semibold">
             “AI for a Sustainable Future: The Role of Z Generation in the
             Digital Era”
-          </h1>
+          </h2>
 
-          <p className=" mr-8 text-sm md:text-base lg:text-[1.35rem]  text-slate-600">
+          <p className="text-sm md:text-base lg:text-[1.35rem] text-slate-600 leading-relaxed">
             IT Workshop ini menjembatani antara potensi Generasi Z dan kekuatan
             AI untuk menciptakan masa depan yang berkelanjutan. Peserta akan
             dibekali wawasan dan alat untuk mentransformasi ide-ide inovatif
@@ -76,20 +76,21 @@ Developer, Founder Rumah Coding Indonesia`,
             <Button label="Daftar Sekarang" variant="primary" />
           </div>
         </div>
-        <div className="w-1/3">
+        <div className="flex justify-center order-1 lg:order-2">
           <img
             src="https://www.invofest-harkatnegeri.com/assets/Maskot-Workshop.png"
-            alt=""
+            alt="Maskot IT Workshop"
+            className="w-full max-w-xs sm:max-w-sm md:max-w-md"
           />
         </div>
       </section>
       <section>
         <div className=" ">
-          <div className="text-center">
-            <h1 className="text-5xl text-red-800 mt-30 font-semibold">
+          <div className="text-center px-2">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl text-red-800 mt-8 md:mt-16 font-semibold">
               Tentang IT Workshop
             </h1>
-            <p className="mt-5 text-[1.35rem] text-base leading-loose">
+            <p className="mt-5 text-base md:text-lg lg:text-[1.35rem] leading-relaxed">
               Workshop “AI for a Sustainable Future: The Role of Z Generation in
               the Digital Era” ini didesain khusus untuk Generasi Z, para
               digital natives yang berada di persimpangan antara inovasi
@@ -105,11 +106,11 @@ Developer, Founder Rumah Coding Indonesia`,
           </div>
         </div>
       </section>
-      <section id="speaker" className="py-24 ">
-        <h2 className="text-5xl text-red-900 font-semibold mb-20 text-center mt-90">
+      <section id="speaker" className="py-12 md:py-24">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl text-red-900 font-semibold mb-10 md:mb-20 text-center">
           Temui Pembicara Khusus Kami
         </h2>
-        <div className="grid grid-cols-3 gap-10 px-3 ">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 px-2">
           {speakers.map((speaker, index) => (
             <SpeakerCard
               key={index}
@@ -121,10 +122,10 @@ Developer, Founder Rumah Coding Indonesia`,
         </div>
       </section>
       <section>
-        <h1 className="text-5xl text-red-800  font-semibold text-center mb-20 mt-70">Pelaksanaan Workshop</h1>
-        <div className="flex flex-col items-center gap-5 max-w-5xl mx-auto px-6">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl text-red-800 font-semibold text-center mb-10 md:mb-20 mt-12 md:mt-24 px-2">Pelaksanaan Workshop</h1>
+        <div className="flex flex-col items-center gap-5 max-w-5xl mx-auto px-4 sm:px-6">
        
-            <div className="grid grid-cols-2 gap-5 w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 w-full">
                 <WorkshopCard
                     icon={Code2}
                     title="Mobile Development"
@@ -141,7 +142,7 @@ Developer, Founder Rumah Coding Indonesia`,
                 />
             </div>
 
-            <div className="w-1/2">
+            <div className="w-full sm:w-1/2">
                 <WorkshopCard
                     icon={ShieldCheck}
                     title="Cyber Security"
@@ -152,7 +153,7 @@ Developer, Founder Rumah Coding Indonesia`,
             </div>
         </div>
       </section>
-      <section id="faq" className="mt-90">
+      <section id="faq" className="mt-12 md:mt-24">
         <div className="text-center">
           <div className="mt-4 mb-4">
             <span className="text-slate-600 text-lg  font-semibold   ">
@@ -160,10 +161,10 @@ Developer, Founder Rumah Coding Indonesia`,
             </span>
           </div>
 
-          <h2 className="text-slate-600 text-4xl font-bold">
+          <h2 className="text-slate-600 text-2xl sm:text-3xl md:text-4xl font-bold px-2">
             Punya Pertanyaan? Lihat{" "}
           </h2>
-          <h2 className=" text-4xl  text-red-800 font-bold mb-4">Disini</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl text-red-800 font-bold mb-4">Disini</h2>
           <div className="text-base text-slate-600 mt-5" >
             <p >
               Ada banyak informasi yang terkait dengan INVOFEST, Anda dapat melihat

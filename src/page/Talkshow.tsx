@@ -61,15 +61,15 @@ const speakers = [
     <div>
       <section
         id="hero"
-        className="py-10 flex gap-1 justify-between items-center "
+        className="py-6 md:py-10 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 items-center"
       >
-        <div className="w-2/3 flex flex-col gap-7  ">
-          <h1 className="text-red-800 text-5xl font-semibold">IT Talkshow</h1>
-          <h1 className="text-red-800 text-3xl font-semibold  mr-40  ">
+        <div className="flex flex-col gap-4 md:gap-6 order-2 lg:order-1">
+          <h1 className="text-red-800 text-3xl sm:text-4xl md:text-5xl font-semibold">IT Talkshow</h1>
+          <h2 className="text-red-800 text-xl sm:text-2xl md:text-3xl font-semibold">
             “Humanizing Technology: Kolaborasi Manusia dan AI di Masa Depan”
-          </h1>
+          </h2>
 
-          <p className=" mr-29 text-sm md:text-base lg:text-[1.35rem]  text-slate-600">
+          <p className="text-sm md:text-base lg:text-[1.35rem] text-slate-600 leading-relaxed">
             Talkshow “Humanizing Technology: Kolaborasi Manusia dan AI di Masa
             Depan” Sebuah diskusi interaktif yang mengeksplorasi cara
             mengintegrasikan nilai-nilai kemanusiaan seperti etika, empati, dan
@@ -83,20 +83,21 @@ const speakers = [
             <Button label="Daftar Sekarang" variant="primary" />
           </div>
         </div>
-        <div className="w-1/3">
+        <div className="flex justify-center order-1 lg:order-2">
           <img
             src="https://www.invofest-harkatnegeri.com/assets/Maskot-Talkshow.png"
-            alt=""
+            alt="Maskot IT Talkshow"
+            className="w-full max-w-xs sm:max-w-sm md:max-w-md"
           />
         </div>
       </section>
       <section id="About">
         <div className=" ">
-          <div className="text-center">
-            <h1 className="text-5xl text-red-800 mt-30 font-semibold">
+          <div className="text-center px-2">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl text-red-800 mt-8 md:mt-16 font-semibold">
               Tentang IT Talkshow
             </h1>
-            <p className="mt-5 text-[1.35rem] text-base leading-loose">
+            <p className="mt-5 text-base md:text-lg lg:text-[1.35rem] leading-relaxed">
               Seiring teknologi, khususnya kecerdasan buatan (AI), yang semakin
               meresap ke dalam setiap aspek kehidupan kita, muncul sebuah
               pertanyaan fundamental: Apakah kita sedang menciptakan teknologi
@@ -114,11 +115,11 @@ const speakers = [
           </div>
         </div>
       </section >
-       <section id="speaker" className="py-24 ">
-              <h2 className="text-5xl text-red-900 font-semibold mb-20 text-center mt-90">
+       <section id="speaker" className="py-12 md:py-24">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl text-red-900 font-semibold mb-10 md:mb-20 text-center">
                 Temui Pembicara Khusus Kami
               </h2>
-              <div className="grid grid-cols-4 gap-10 px-3 ">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 px-2">
                 {speakers.map((speaker, index) => (
                   <SpeakerCard
                     key={index}
@@ -129,8 +130,8 @@ const speakers = [
                 ))}
               </div>
             </section>
-             <section id="pelaksanaan" className="mt-70">
-              <h1 className="text-center text-5xl font-semibold  text-red-900 mb-10 ">Pelaksanaan IT Seminar</h1>
+             <section id="pelaksanaan" className="mt-12 md:mt-24">
+              <h1 className="text-center text-3xl sm:text-4xl md:text-5xl font-semibold text-red-900 mb-8 md:mb-10 px-2">Pelaksanaan IT Talkshow</h1>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl mx-auto px-6">
                 <InfoCard icon={CalendarDays} text="Senin, 24 November 2025" />
                 <InfoCard icon={Clock9} text="08.00 WIB - 12.00 WIB" />
@@ -138,7 +139,7 @@ const speakers = [
                 <InfoCard icon={Building} text="Kampus 1 (Mataram) Universitas Harkat Negeri" />
             </div>
 
-             <section id="faq" className="mt-90">
+             <section id="faq" className="mt-12 md:mt-24">
         <div className="text-center">
           <div className="mt-4 mb-4">
             <span className="text-slate-600 text-lg  font-semibold   ">
@@ -146,10 +147,10 @@ const speakers = [
             </span>
           </div>
 
-          <h2 className="text-slate-600 text-4xl font-bold">
+          <h2 className="text-slate-600 text-2xl sm:text-3xl md:text-4xl font-bold px-2">
             Punya Pertanyaan? Lihat{" "}
           </h2>
-          <h2 className=" text-4xl  text-red-800 font-bold mb-4">Disini</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl text-red-800 font-bold mb-4">Disini</h2>
           <div className="text-base text-slate-600 mt-5" >
             <p >
               Ada banyak informasi yang terkait dengan INVOFEST, Anda dapat melihat

@@ -59,15 +59,15 @@ export default function EventIndex() {
   };
 
   return (
-    <div className="p-8">
-      <div className="flex items-center justify-between border-b border-gray-200 pb-6 mb-8">
+    <div className="p-4 sm:p-6 md:p-8">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-6 mb-6 md:mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-[#7B1D3F]">Event</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#7B1D3F]">Event</h1>
           <p className="text-gray-500 text-sm">Daftar semua kegiatan festival</p>
         </div>
         <Link
           to="/dashboard/event/new"
-          className="bg-[#7B1D3F] text-white font-bold px-6 py-3 rounded-xl hover:bg-[#5a152e] transition-all shadow-lg"
+          className="bg-[#7B1D3F] text-white font-bold px-5 py-3 rounded-xl hover:bg-[#5a152e] transition-all shadow-lg text-center text-sm sm:text-base shrink-0"
         >
           + Add New Event
         </Link>
@@ -96,7 +96,7 @@ export default function EventIndex() {
           {events.map((event) => (
             <div
               key={event.id}
-              className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm flex justify-between gap-4"
+              className="bg-white rounded-2xl border border-gray-100 p-4 sm:p-6 shadow-sm flex flex-col sm:flex-row sm:justify-between gap-4"
             >
               <div>
                 <h2 className="text-xl font-bold text-[#7B1D3F]">{event.name}</h2>

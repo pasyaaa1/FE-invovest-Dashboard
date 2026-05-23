@@ -47,10 +47,10 @@ export default function DashboardIndex() {
   ];
 
   return (
-    <div className="p-8 bg-[#F3F4F6] min-h-full space-y-8">
-      <div className="bg-white rounded-3xl p-8 md:p-10 shadow-sm border border-gray-100">
-        <h1 className="text-3xl font-bold text-[#7B1D3F]">Dashboard</h1>
-        <p className="text-gray-500 mt-2 text-lg">
+    <div className="p-4 sm:p-6 md:p-8 bg-[#F3F4F6] min-h-full space-y-6 md:space-y-8">
+      <div className="bg-white rounded-2xl md:rounded-3xl p-5 sm:p-8 md:p-10 shadow-sm border border-gray-100">
+        <h1 className="text-2xl sm:text-3xl font-bold text-[#7B1D3F]">Dashboard</h1>
+        <p className="text-gray-500 mt-2 text-base sm:text-lg break-words">
           Selamat datang{user ? `, ${user}` : ""}! Berikut ringkasan data INVOFEST.
         </p>
       </div>

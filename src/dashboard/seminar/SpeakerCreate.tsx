@@ -41,7 +41,7 @@ export default function SpeakerCreate() {
   };
 
   return (
-    <div className="p-8 flex justify-center bg-[#F3F4F6] min-h-full">
+    <div className="p-4 sm:p-6 md:p-8 flex justify-center bg-[#F3F4F6] min-h-full">
       <div className="w-full max-w-lg bg-white p-10 rounded-[2.5rem] shadow-sm border border-gray-100">
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-[#7B1D3F]">Tambah Speaker</h2>

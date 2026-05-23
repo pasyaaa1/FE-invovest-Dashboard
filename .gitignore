@@ -12,7 +12,7 @@ dist
 dist-ssr
 *.local
 
-# Environment (jangan commit — set di Vercel / lokal)
+
 .env
 .env.local
 .env.*.local

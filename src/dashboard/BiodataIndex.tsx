@@ -59,10 +59,10 @@ export default function BiodataIndex() {
   };
 
   return (
-    <div className="p-8 bg-[#F3F4F6] min-h-full">
+    <div className="p-4 sm:p-6 md:p-8 bg-[#F3F4F6] min-h-full">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-[#7B1D3F]">Biodata</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#7B1D3F]">Biodata</h1>
           <p className="text-gray-500 mt-2">
             Data diri mahasiswa pembuat website INVOFEST
           </p>

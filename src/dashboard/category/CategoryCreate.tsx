@@ -36,7 +36,7 @@ export default function CategoryCreate() {
   };
 
   return (
-    <div className="p-8 flex justify-center bg-[#F3F4F6] min-h-full">
+    <div className="p-4 sm:p-6 md:p-8 flex justify-center bg-[#F3F4F6] min-h-full">
       <div className="w-full max-w-md bg-white p-10 rounded-[2.5rem] shadow-sm border border-gray-100">
         <h2 className="text-2xl font-bold text-[#7B1D3F] mb-8 border-b border-gray-50 pb-4">New Category</h2>
         {submitError && (

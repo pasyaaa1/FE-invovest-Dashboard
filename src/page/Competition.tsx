@@ -59,17 +59,17 @@ export default function Competition() {
     <div>
       <section
         id="hero"
-        className="py-10 flex gap-10 justify-between items-center "
+        className="py-6 md:py-10 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 items-center"
       >
-        <div className="w-2/3 flex flex-col gap-6">
-          <h1 className="text-red-800 text-5xl font-semibold">
+        <div className="flex flex-col gap-4 md:gap-6 order-2 lg:order-1">
+          <h1 className="text-red-800 text-3xl sm:text-4xl md:text-5xl font-semibold">
             IT Competition
           </h1>
-          <h1 className="text-red-800 text-3xl font-semibold   ">
+          <h2 className="text-red-800 text-xl sm:text-2xl md:text-3xl font-semibold">
             "From Creation to Innovation"
-          </h1>
+          </h2>
 
-          <p className=" mr-8 text-sm md:text-base lg:text-[1.35rem]  text-slate-600">
+          <p className="text-sm md:text-base lg:text-[1.35rem] text-slate-600 leading-relaxed">
             Kompetisi dalam INVOFEST ini mengusung tema “From Creation to
             Innovation”, Tema ini bertujuan mengajak generasi muda untuk
             mengembangkan inovasi dan kreativitas guna membentuk kelompok yang
@@ -82,20 +82,21 @@ export default function Competition() {
             <Button label="Hubungi Panitia" variant="outline" />
           </div>
         </div>
-        <div className="w-1/3">
+        <div className="flex justify-center order-1 lg:order-2">
           <img
             src="https://www.invofest-harkatnegeri.com/assets/Maskot-Lomba.png"
-            alt=""
+            alt="Maskot IT Competition"
+            className="w-full max-w-xs sm:max-w-sm md:max-w-md"
           />
         </div>
       </section>
       <section>
         <div className=" ">
-          <div className="text-center">
-            <h1 className="text-5xl text-red-800 mt-30 font-semibold">
+          <div className="text-center px-2">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl text-red-800 mt-8 md:mt-16 font-semibold">
               DESKRIPSI KOMPETISI
             </h1>
-            <p className="mt-5 text-[1.35rem] text-base leading-loose">
+            <p className="mt-5 text-base md:text-lg lg:text-[1.35rem] leading-relaxed">
               Kompetisi atau perlombaan yang ada dalam kegiatan{" "}
               <b>INVOFEST (Infomatics Vocational Festival) 2025</b> adalah
               diantaranya National Poster Design Competition, UI UX Design
@@ -113,17 +114,17 @@ export default function Competition() {
         </div>
       </section>
       <section>
-        <div className="mt-90">
+        <div className="mt-12 md:mt-24">
           <div>
-            <div className="text-center">
-              <h1 className="text-5xl text-red-800  font-semibold">
+            <div className="text-center px-2">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl text-red-800 font-semibold">
                 DAFTAR KOMPETISI
               </h1>
-              <p className="mt-5 text-[1.15rem] text-slate-600 mb-7 leading-8">
+              <p className="mt-5 text-base md:text-lg text-slate-600 mb-7 leading-8">
                 Berikut Adalah Daftar Kompetisi Yang Ada Pada Event INVOFEST.
               </p>
             </div>
-            <div className="grid grid-cols-3 gap-6 p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 sm:p-6">
               {event.map((event, index) => (
                 <EventCard
                   key={index}
@@ -144,10 +145,10 @@ export default function Competition() {
             </span>
           </div>
 
-          <h2 className="text-slate-600 text-4xl font-bold">
+          <h2 className="text-slate-600 text-2xl sm:text-3xl md:text-4xl font-bold px-2">
             Punya Pertanyaan? Lihat{" "}
           </h2>
-          <h2 className=" text-4xl  text-red-800 font-bold mb-4">Disini</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl text-red-800 font-bold mb-4">Disini</h2>
           <div className="text-base text-slate-600 mt-5" >
             <p >
               Ada banyak informasi yang terkait dengan INVOFEST, Anda dapat melihat
